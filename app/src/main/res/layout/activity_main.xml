@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/bg"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            >
+
+            <TextView
+                android:id="@+id/welcome_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/welcome_txt"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/_34sdp"
+                android:fontFamily="@font/antonfont"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/black"
+                />
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_170sdp"
+                android:src="@drawable/governorlogo"
+                android:layout_below="@+id/welcome_text"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/material_std_name"
+                android:layout_width="@dimen/_280sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_below="@+id/logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:background="@drawable/edit_text_shape_one"
+                android:hint="Student Email">
+
+                <EditText
+                    android:id="@+id/std_email"
+                    android:layout_width="@dimen/_271sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/baseline_email_24"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/login_edit_texts_design"
+                    android:paddingStart="@dimen/_5sdp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/material_password"
+                android:layout_width="@dimen/_280sdp"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                android:layout_below="@+id/material_std_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:counterEnabled="true"
+                app:counterMaxLength="12"
+                >
+                <EditText
+                    android:id="@+id/login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPassword"
+                    android:minHeight="@dimen/_40sdp"
+                    android:hint="Password"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:drawableStart="@drawable/baseline_lock_reset_black"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:background="@drawable/edit_text_shape_one"
+                    android:maxLength="12"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/li_la_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/material_password"
+                android:layout_centerHorizontal="true"
+                >
+                <ProgressBar
+                    android:id="@+id/login_progrss_bar"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/material_password"
+                    android:indeterminate="true"
+                    android:indeterminateTint="#FFFFFF"
+                    />
+            </LinearLayout>
+            <Button
+                android:layout_width="@dimen/_260sdp"
+                android:layout_height="@dimen/_38sdp"
+                android:id="@+id/login_btn"
+                android:text="Login"
+                android:textSize="@dimen/_17ssp"
+                android:textColor="@color/white"
+                android:layout_below="@+id/li_la_progress_bar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_39sdp"
+                android:textStyle="bold"
+                />
+
+            <Button
+                android:layout_width="@dimen/_260sdp"
+                android:layout_height="@dimen/_38sdp"
+                android:id="@+id/create_acc"
+                android:text="SIGN UP"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_17ssp"
+                android:layout_below="@+id/login_btn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_7sdp"
+                />
+
+            <TextView
+                android:id="@+id/forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password?"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/white"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_below="@+id/material_password"
+                />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

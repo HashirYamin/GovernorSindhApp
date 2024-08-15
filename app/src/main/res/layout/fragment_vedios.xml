@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/vedios_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_20sdp"
+        android:textColor="@color/black"
+        android:text="Vedios Link:"/>
+    <ListView
+        android:id="@+id/listView_videos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/vedios_heading"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_above="@+id/progressBar_videos"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_videos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

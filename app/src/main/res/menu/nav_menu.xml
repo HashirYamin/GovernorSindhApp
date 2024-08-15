@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <!-- Course Work Heading -->
+    <item android:title="Course Work"
+        android:icon="@drawable/rounded_menu_book_24"
+        android:iconTint="@color/white">
+
+        <menu>
+            <!-- Group of Course Work Subcategories -->
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/home_nav"
+                    android:title="Home"
+                    android:icon="@drawable/baseline_home_24"/>
+                <item
+                    android:id="@+id/lectures"
+                    android:title="Lectures"
+                    android:icon="@drawable/baseline_library_books_24"/>
+
+                <item
+                    android:id="@+id/assignments"
+                    android:title="Assignments"
+                    android:icon="@drawable/baseline_assignment_24"/>
+
+                <item
+                    android:id="@+id/yt_videos"
+                    android:title="Videos"
+                    android:icon="@drawable/baseline_smart_display_24"/>
+
+                <item
+                    android:id="@+id/links"
+                    android:title="Links"
+                    android:icon="@drawable/baseline_link_24"/>
+
+
+
+            </group>
+        </menu>
+    </item>
+
+    <!-- Other Options -->
+    <item android:title="Communications">
+        <menu>
+            <group>
+                <item
+                    android:id="@+id/circular"
+                    android:title="Circular"
+                    android:icon="@drawable/baseline_report_24"/>
+                <item
+                    android:id="@+id/notifications"
+                    android:title="Notifications"
+                    android:icon="@drawable/baseline_circle_notifications_24"
+                    />
+                <item
+                    android:id="@+id/message"
+                    android:title="Message"
+                    android:icon="@drawable/baseline_message_24"/>
+                <item
+                    android:id="@+id/contacts"
+                    android:title="Contacts"
+                    android:icon="@drawable/baseline_contact_page_24"/>
+
+            </group>
+        </menu>
+    </item>
+
+</menu>

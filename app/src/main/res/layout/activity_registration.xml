@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registration"
+    android:background="@drawable/registrationbg"
+    >
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:src="@drawable/governorlogo"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                />
+
+            <TextView
+                android:id="@+id/regiteration_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STUDENT\nSIGN-UP"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="@dimen/_28ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_20sdp"
+                />
+            <EditText
+                android:id="@+id/std_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/regiteration_title"
+                android:padding="@dimen/_12sdp"
+                android:hint="Student Name"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:drawableLeft="@drawable/baseline_person_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:inputType="text"
+                android:background="@drawable/edit_text_shape_one"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_24sdp"
+                />
+            <EditText
+                android:id="@+id/roll_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/std_name"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:padding="@dimen/_12sdp"
+                android:hint="Roll No"
+                android:textSize="@dimen/_14sdp"
+                android:inputType="number"
+                android:background="@drawable/edit_text_shape_one"
+                android:drawableLeft="@drawable/baseline_numbers_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                />
+
+            <EditText
+                android:id="@+id/cnic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/roll_no"
+                android:inputType="number"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edit_text_shape_one"
+                android:digits="0123456789"
+                android:textSize="@dimen/_14sdp"
+                android:drawableLeft="@drawable/baseline_credit_card_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:elevation="8dp"
+                android:hint="Cnic or Bayform No"
+                android:importantForAccessibility="yes"
+                android:maxLength="15"
+                android:padding="@dimen/_12sdp" />
+            <EditText
+                android:id="@+id/phone_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
+                android:layout_below="@+id/cnic"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edit_text_shape_one"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:hint="Phone No"
+                android:drawableLeft="@drawable/baseline_phone_enabled_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:inputType="number"
+                android:padding="@dimen/_12sdp" />
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
+                android:layout_below="@+id/phone_no"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edit_text_shape_one"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:hint="Email"
+
+                android:inputType="textEmailAddress"
+                android:drawableLeft="@drawable/baseline_email_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:padding="@dimen/_12sdp" />
+            <EditText
+                android:id="@+id/rg_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/email"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edit_text_shape_one"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:drawableLeft="@drawable/baseline_password_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:textSize="@dimen/_14sdp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="@dimen/_12sdp" />
+            <EditText
+                android:id="@+id/rg_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rg_password"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edit_text_shape_one"
+                android:elevation="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:drawableLeft="@drawable/baseline_password_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:padding="@dimen/_12sdp" />
+            <LinearLayout
+                android:id="@+id/li_la_reg_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rg_confirm_password"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_centerHorizontal="true"
+                >
+                <ProgressBar
+                    android:id="@+id/reg_progrss_bar"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/material_password"
+                    android:indeterminate="true"
+                    android:indeterminateTint="#F8A500"
+                    />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/register_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rg_confirm_password"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_marginRight="@dimen/_18sdp"
+                android:text="Let me Register"
+                android:textSize="@dimen/_14sdp"
+                android:textColor="@color/white" />
+            <Button
+                android:id="@+id/sign_up_back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rg_confirm_password"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:textSize="17dp"
+                android:text="Back"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

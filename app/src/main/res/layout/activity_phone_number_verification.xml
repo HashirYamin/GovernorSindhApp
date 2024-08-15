@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/_15sdp"
+    tools:context=".PhoneNumberVerification">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:id="@+id/current_activity_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="20"
+                android:layout_marginTop="@dimen/_30sdp"
+                >
+
+
+                <RelativeLayout
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:background="@drawable/circular_bg"
+                    android:backgroundTint="@color/my_primary">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_11ssp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:background="@drawable/circular_bg"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:backgroundTint="@color/gray"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="2"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_11sdp" />
+                </RelativeLayout>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/phone_img"
+                android:layout_width="@dimen/_143sdp"
+                android:layout_height="@dimen/_143sdp"
+                android:src="@drawable/baseline_phone_24"
+                app:tint="@color/my_primary"
+                android:layout_below="@+id/current_activity_no"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_weight="20"
+                />
+            <ProgressBar
+                android:id="@+id/phone_ver_pr_br"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phone_img"
+                android:layout_centerHorizontal="true"
+                android:indeterminateTint="@color/my_primary"
+                android:visibility="invisible"
+                />
+            <TextView
+                android:id="@+id/enter_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter your Registere Phone Number for verification:"
+                android:layout_gravity="center_vertical"
+                android:letterSpacing="0.08"
+                android:textStyle="bold"
+                android:layout_below="@+id/phone_ver_pr_br"
+                android:textSize="@dimen/_20ssp"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:layout_weight="5"
+                />
+            <EditText
+                android:id="@+id/phone_no_otp_verification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/enter_no"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:background="@drawable/phone_btn"
+                android:elevation="8dp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:hint="Mobile No"
+                android:drawableLeft="@drawable/baseline_phone_enabled_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:inputType="number"
+                android:padding="@dimen/_12sdp" />
+
+            <Button
+                android:id="@+id/send_otp_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Send Otp"
+                android:layout_below="@+id/phone_no_otp_verification"
+                android:background="@drawable/btn_rounded_corner"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:layout_marginTop="@dimen/_20sdp"
+                />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

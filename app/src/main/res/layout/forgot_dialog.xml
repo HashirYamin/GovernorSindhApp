@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/_13sdp"
+    android:padding="@dimen/_10sdp"
+    android:id="@+id/dialog_forgot">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_180sdp"
+        android:id="@+id/dialog_box"
+        android:background="@drawable/dialogbox_bg"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/forgot_title"
+            android:padding="@dimen/_10sdp"
+            android:text="Forgot Password?"
+            android:textSize="@dimen/_15ssp"
+            android:background="@drawable/button_forgot_password"
+            android:drawableLeft="@drawable/baseline_lock_reset_24"
+            android:drawablePadding="@dimen/_5sdp"
+            android:textColor="@color/white"
+        />
+        <TextView
+            android:id="@+id/entering_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter your email address :"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_11ssp"
+            android:textColor="#0095B0"
+            android:layout_below="@+id/forgot_title"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_25sdp"
+            android:id="@+id/email_box"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_23sdp"
+            android:background="@drawable/login_edit_texts_design"
+            android:maxLines="1"
+            android:gravity="center"
+            android:layout_below="@+id/entering_email"
+            />
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:text="Cancel"
+            android:textSize="@dimen/_15ssp"
+            android:layout_marginTop="@dimen/_120sdp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/cancel_reset_btns"
+            android:textColor="@color/white"
+            />
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:text="Reset"
+            android:layout_marginTop="@dimen/_120sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15ssp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_13sdp"
+            android:background="@drawable/cancel_reset_btns"
+
+            />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

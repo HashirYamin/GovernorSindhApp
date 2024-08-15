@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.GovernorSindhStudents" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+<!--        primary brand color-->
+        <item name="colorPrimaryDark">@color/lightGreen</item>
+        <item name="colorPrimary">@color/lightGreen</item>
+        <item name="colorOnPrimary">@color/white</item>
+<!--        secondary brand color-->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+<!--        status bar color-->
+        <item name="android:statusBarColor">@color/lightGreen</item>
+    </style>
+
+    <style name="Base.Theme.GovernorSindhStudents" parent="Theme.GovernorSindhStudents" />
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_out</item>
+    </style>
+</resources>

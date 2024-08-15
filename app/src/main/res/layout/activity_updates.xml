@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".Updates">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/update_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/profile_bg"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Updates"
+                android:textSize="@dimen/_20ssp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+        <ListView
+            android:layout_below="@+id/update_cardview"
+            android:id="@+id/updatesListView"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/_11sdp"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="16dp"/>
+
+    <Button
+        android:id="@+id/deleteAllButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Clear All"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginEnd="29dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        />
+
+
+</RelativeLayout>

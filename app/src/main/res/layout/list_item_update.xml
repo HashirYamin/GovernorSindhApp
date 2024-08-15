@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="@dimen/_275sdp"
+    android:layout_height="@dimen/_35sdp"
+    android:padding="10dp"
+
+    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardElevation="@dimen/_2sdp"
+    android:backgroundTint="@color/lightGreen3"
+    app:cardMaxElevation="@dimen/_5sdp"
+    app:cardPreventCornerOverlap="true"
+    android:background="?attr/selectableItemBackground">
+
+    <TextView
+        android:id="@+id/updateType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="@dimen/_22sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingBottom="4dp" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/update_text"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Updated On"-->
+<!--        android:textColor="@android:color/holo_red_dark"-->
+<!--        android:layout_marginTop="@dimen/_1sdp"-->
+<!--        android:layout_marginStart="@dimen/_100sdp"-->
+<!--        android:textSize="14sp" />-->
+    <TextView
+        android:id="@+id/updateTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginStart="@dimen/_200sdp"
+        android:textSize="14sp" />
+
+</androidx.cardview.widget.CardView>

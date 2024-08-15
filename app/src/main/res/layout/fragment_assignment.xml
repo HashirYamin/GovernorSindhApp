@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/assignment_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_20sdp"
+        android:textColor="@color/black"
+        android:text="Assignemts:"/>
+    <ProgressBar
+        android:id="@+id/progressBar_assign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <ListView
+        android:layout_marginTop="@dimen/_5sdp"
+        android:id="@+id/listView_assign"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/assignment_heading"
+        android:layout_height="match_parent"
+        android:layout_above="@id/progressBar_assign"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home_bottom"
+        android:title="Home"
+        android:icon="@drawable/baseline_home_24"/>
+
+    <item
+        android:id="@+id/circular_bottom"
+        android:title="Circular"
+        android:icon="@drawable/baseline_notification_important_24"
+        />
+
+    <item
+        android:id="@+id/contact_us_bottom"
+        android:title="Contact Us"
+        android:icon="@drawable/baseline_connect_without_contact_24" />
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/baseline_person_outline_24" />
+
+</menu>
