@@ -29,6 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/links_cardview"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/_10sdp"
         />
 
     <ProgressBar

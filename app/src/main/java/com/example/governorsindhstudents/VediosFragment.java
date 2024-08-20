@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,15 +20,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class VediosFragment extends Fragment {
 
     private ListView listView;
     private ProgressBar progressBar;
-    private ArrayAdapter<String> adapter;
-    private List<String> videoDescriptions;
-    private List<String> videoUrls;
+    private SimpleAdapter adapter;
+    private List<Map<String, String>> videoList;
     private FirebaseFirestore firestore;
 
     public VediosFragment() {
@@ -44,10 +45,15 @@ public class VediosFragment extends Fragment {
         listView = view.findViewById(R.id.listView_videos);
         progressBar = view.findViewById(R.id.progressBar_videos);
 
-        videoDescriptions = new ArrayList<>();
-        videoUrls = new ArrayList<>();
+        videoList = new ArrayList<>();
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, videoDescriptions);
+        adapter = new SimpleAdapter(
+                getContext(),
+                videoList,
+                R.layout.items_list,
+                new String[]{"description"},
+                new int[]{R.id.tvFileName}
+        );
         listView.setAdapter(adapter);
 
         firestore = FirebaseFirestore.getInstance();
@@ -55,7 +61,7 @@ public class VediosFragment extends Fragment {
         fetchVideosFromFirestore();
 
         listView.setOnItemClickListener((adapterView, view1, position, id) -> {
-            String url = videoUrls.get(position);
+            String url = videoList.get(position).get("url");
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(url));
             startActivity(intent);
@@ -73,15 +79,17 @@ public class VediosFragment extends Fragment {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         if (task.getResult() != null && !task.getResult().isEmpty()) {
-                            videoDescriptions.clear(); // Clear the list to avoid duplication
-                            videoUrls.clear();        // Clear the URLs list as well
+                            videoList.clear(); // Clear the list to avoid duplication
 
                             for (DocumentSnapshot document : task.getResult().getDocuments()) {
                                 String videoDescription = document.getString("videoDescription");
                                 String videoUrl = document.getString("videoUrl");
 
-                                videoDescriptions.add(videoDescription);
-                                videoUrls.add(videoUrl);
+                                Map<String, String> videoData = new HashMap<>();
+                                videoData.put("description", videoDescription);
+                                videoData.put("url", videoUrl);
+
+                                videoList.add(videoData);
                             }
                             adapter.notifyDataSetChanged();
                             listView.setVisibility(View.VISIBLE);

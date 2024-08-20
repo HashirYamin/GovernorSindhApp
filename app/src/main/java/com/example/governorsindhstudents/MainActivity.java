@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         forgotPassword = findViewById(R.id.forgot_password);
         mAuth = FirebaseAuth.getInstance();
 
-        SignUp.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, Registration.class)));
 
 
         handler = new Handler();

@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,38 +19,33 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LecturesActivity extends AppCompatActivity {
 
     private ListView listView;
     private ProgressBar progressBar;
-    private ArrayAdapter<String> adapter;
-    private List<String> fileNames;
-    private List<String> fileUrls;
     private FirebaseFirestore firestore;
+    private List<Map<String, String>> dataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lectures);
 
-        listView = findViewById(R.id.listView);
+        listView = findViewById(R.id.lectures_list);
         progressBar = findViewById(R.id.progressBar);
-
-        fileNames = new ArrayList<>();
-        fileUrls = new ArrayList<>();
-
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, fileNames);
-        listView.setAdapter(adapter);
-
         firestore = FirebaseFirestore.getInstance();
+        dataList = new ArrayList<>();
 
         fetchFilesFromFirestore();
 
+        // Handle item clicks for downloading
         listView.setOnItemClickListener((adapterView, view, position, id) -> {
-            String url = fileUrls.get(position);
-            String fileName = fileNames.get(position);
+            String url = dataList.get(position).get("fileUrl");
+            String fileName = dataList.get(position).get("fileName");
             downloadFile(url, fileName);
         });
     }
@@ -59,13 +54,12 @@ public class LecturesActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         firestore.collection("files")
-                .orderBy("timestamp", Query.Direction.DESCENDING)  // Order by timestamp in descending order
+                .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         if (task.getResult() != null && !task.getResult().isEmpty()) {
-                            fileNames.clear();  // Clear the list to avoid duplication
-                            fileUrls.clear();   // Clear the URLs list as well
+                            dataList.clear();  // Clear the list to avoid duplication
 
                             for (DocumentSnapshot document : task.getResult().getDocuments()) {
                                 String fileName = document.getString("fileName");
@@ -74,10 +68,23 @@ public class LecturesActivity extends AppCompatActivity {
                                 Log.d("LecturesActivity", "File Name: " + fileName);
                                 Log.d("LecturesActivity", "File URL: " + fileUrl);
 
-                                fileNames.add(fileName);
-                                fileUrls.add(fileUrl);
+                                // Prepare the data
+                                Map<String, String> dataMap = new HashMap<>();
+                                dataMap.put("fileName", fileName);
+                                dataMap.put("fileUrl", fileUrl);
+                                dataList.add(dataMap);
                             }
-                            adapter.notifyDataSetChanged();
+
+                            // Bind data to the ListView using SimpleAdapter
+                            SimpleAdapter adapter = new SimpleAdapter(
+                                    LecturesActivity.this,
+                                    dataList,
+                                    R.layout.items_list, // Custom layout for list items
+                                    new String[]{"fileName"}, // Keys in dataMap
+                                    new int[]{R.id.tvFileName} // TextView in lecture_list_item.xml
+                            );
+
+                            listView.setAdapter(adapter);
                             listView.setVisibility(View.VISIBLE);
                         } else {
                             Toast.makeText(LecturesActivity.this, "No files found.", Toast.LENGTH_SHORT).show();

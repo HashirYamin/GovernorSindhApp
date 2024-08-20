@@ -24,8 +24,6 @@ public class ChangePassword extends AppCompatActivity {
     private EditText ConfirmPassword;
     private Button ChangePassword;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +46,7 @@ public class ChangePassword extends AppCompatActivity {
                     newPasswordLayout.setHelperText("Strong Password!!");
                     newPasswordLayout.setError("");
                 } else {
-                    newPasswordLayout.setError("");
-                    newPasswordLayout.setError("Password must contain alphabets, a special char and a digit ");
+                    newPasswordLayout.setError("Password must contain alphabets, a special character, and a digit");
                 }
             }
 
@@ -59,22 +56,25 @@ public class ChangePassword extends AppCompatActivity {
         });
 
         ChangePassword.setOnClickListener(view -> {
-            String newPassword = NewPassword.getText().toString();
-            String confirmPassword = ConfirmPassword.getText().toString();
+            String newPassword = NewPassword.getText().toString().trim();
+            String confirmPassword = ConfirmPassword.getText().toString().trim();
 
-            if(TextUtils.isEmpty(newPassword)){
+            if (TextUtils.isEmpty(newPassword)) {
                 NewPassword.setError("Enter New Password");
-            }else if (!isValidPassword(newPassword)){
+            } else if (!isValidPassword(newPassword)) {
                 NewPassword.setError("Password must be at least 8 characters long and include a letter, a digit, and a special symbol");
-            }else if (!newPassword.equals(confirmPassword)){
-                ConfirmPassword.setError("Password and Confirm Password did'nt match");
-            }else {
+            } else if (!newPassword.equals(confirmPassword)) {
+                ConfirmPassword.setError("Password and Confirm Password didn't match");
+            } else {
                 updatePassword(newPassword);
             }
         });
     }
+
     public void updatePassword(String newPassword) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
             user.updatePassword(newPassword).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(ChangePassword.this, "Password updated successfully", Toast.LENGTH_SHORT).show();
@@ -82,7 +82,11 @@ public class ChangePassword extends AppCompatActivity {
                     Toast.makeText(ChangePassword.this, "Password update failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+        } else {
+            Toast.makeText(this, "User is not authenticated", Toast.LENGTH_SHORT).show();
+        }
     }
+
     public static boolean isValidPassword(String password) {
         if (password.length() < 8) {
             return false;
@@ -103,5 +107,4 @@ public class ChangePassword extends AppCompatActivity {
         }
         return hasLetter && hasDigit && hasSpecialChar;
     }
-
 }

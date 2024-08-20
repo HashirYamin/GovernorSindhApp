@@ -52,38 +52,6 @@ public class Updates extends AppCompatActivity {
             updatesList.clear();
             updatesAdapter.notifyDataSetChanged();
         });
-        updatesListView.setOnItemClickListener((parent, view, position, id) -> {
-            UpdateItem selectedUpdate = updatesList.get(position);
-            String updateType = selectedUpdate.getType();
-
-            // Log the updateType value
-            Log.d("UpdatesActivity", "Update Type: " + updateType);
-
-            Intent intent = null;
-            switch (updateType) {
-                case "files":
-                    intent = new Intent(Updates.this, LecturesActivity.class);
-                    break;
-                case "links":
-                    intent = new Intent(Updates.this, LinksActivity.class);
-                    break;
-                case "assignments":
-                    intent = new Intent(Updates.this, AssignmentsActivity.class);
-                    break;
-                case "videos":
-                    intent = new Intent(Updates.this, VediosActivity.class);
-                    break;
-                default:
-                    Log.w("UpdatesActivity", "Unknown update type: " + updateType);
-                    break;
-            }
-
-            if (intent != null) {
-                Toast.makeText(Updates.this, "Opening: " + updateType, Toast.LENGTH_SHORT).show();
-                startActivity(intent);
-            }
-        });
-
     }
 
     private void loadUpdates() {
@@ -91,15 +59,20 @@ public class Updates extends AppCompatActivity {
         CollectionReference updatesRef = db.collection("updates");
 
         Set<String> deletedUpdates = sharedPreferences.getStringSet("deletedUpdates", new HashSet<>());
+        long lastSeenUpdateTime = sharedPreferences.getLong("lastSeenUpdateTime", 0);
 
         updatesRef.orderBy("timestamp", Query.Direction.DESCENDING).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        // Use Pakistan Standard Time (Asia/Karachi) for formatting
                         DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm a");
-                        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+                        dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Karachi"));
 
                         for (DocumentSnapshot document : task.getResult()) {
                             String type = document.getString("type");
+                            if ("file".equals(type)) {
+                                type = "lectures";
+                            }
                             String documentId = document.getId();
 
                             // Skip if the update is in the deletedUpdates set
@@ -109,9 +82,9 @@ public class Updates extends AppCompatActivity {
 
                             Date date = document.getTimestamp("timestamp").toDate();
                             String formattedDate = dateFormat.format(date);
+                            boolean isNew = date.getTime() > lastSeenUpdateTime;
 
-                            updatesList.add(new UpdateItem(document.getId(), type, formattedDate));
-
+                            updatesList.add(new UpdateItem(document.getId(), type, formattedDate, isNew));
                         }
                         updatesAdapter.notifyDataSetChanged();
 
@@ -129,6 +102,8 @@ public class Updates extends AppCompatActivity {
                     }
                 });
     }
+
+
 
     private void saveDeletedUpdates() {
         Set<String> deletedUpdates = sharedPreferences.getStringSet("deletedUpdates", new HashSet<>());

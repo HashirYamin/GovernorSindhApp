@@ -2,9 +2,9 @@ package com.example.governorsindhstudents;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,14 +14,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NewsActivity extends AppCompatActivity {
 
     private ListView listView;
     private ProgressBar progressBar;
-    private ArrayAdapter<String> adapter;
-    private List<String> newsList;
+    private SimpleAdapter adapter;
+    private List<Map<String, String>> newsList;
     private FirebaseFirestore firestore;
 
     @Override
@@ -30,11 +32,17 @@ public class NewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news);
 
         listView = findViewById(R.id.listView_news);
-        progressBar = findViewById(R.id.progressBar_news);
+        progressBar = findViewById(R.id.progress_bar_news);
 
         newsList = new ArrayList<>();
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, newsList);
+        adapter = new SimpleAdapter(
+                this,
+                newsList,
+                R.layout.news_item_list,
+                new String[]{"title", "details"},
+                new int[]{R.id.tvNewsName, R.id.tvNewsDetails}
+        );
         listView.setAdapter(adapter);
 
         firestore = FirebaseFirestore.getInstance();
@@ -63,8 +71,14 @@ public class NewsActivity extends AppCompatActivity {
                                 if (content == null) content = "No Content";
                                 if (day == null) day = "No Day";
 
-                                String displayText = day + ": " + title + "\n" + content;
-                                newsList.add(displayText);
+                                String details = day + ": " + content;
+
+                                // Create a map to hold the title and details
+                                Map<String, String> newsItem = new HashMap<>();
+                                newsItem.put("title", title);
+                                newsItem.put("details", details);
+
+                                newsList.add(newsItem);
                             }
 
                             adapter.notifyDataSetChanged();
@@ -73,6 +87,7 @@ public class NewsActivity extends AppCompatActivity {
                             Toast.makeText(NewsActivity.this, "No news found.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
+
                         // Log the error message
                         String errorMsg = task.getException() != null ? task.getException().getMessage() : "Unknown error";
                         Toast.makeText(NewsActivity.this, "Failed to load news: " + errorMsg, Toast.LENGTH_LONG).show();
@@ -80,5 +95,4 @@ public class NewsActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                 });
     }
-
 }

@@ -17,8 +17,8 @@
         android:layout_below="@+id/vedios_heading"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_above="@+id/progressBar_videos"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp" />
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/_10sdp" />
 
     <ProgressBar
         android:id="@+id/progressBar_videos"

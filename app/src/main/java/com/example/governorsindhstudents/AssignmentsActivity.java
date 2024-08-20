@@ -6,10 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,15 +17,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AssignmentsActivity extends AppCompatActivity {
 
     private ListView listView;
     private ProgressBar progressBar;
-    private ArrayAdapter<String> adapter;
-    private List<String> assignmentTitles;
-    private List<String> assignmentUrls;
+    private SimpleAdapter adapter;
+    private List<Map<String, String>> assignmentList;
     private FirebaseFirestore firestore;
 
     @Override
@@ -37,10 +37,15 @@ public class AssignmentsActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView_assign);
         progressBar = findViewById(R.id.progressBar_assign);
 
-        assignmentTitles = new ArrayList<>();
-        assignmentUrls = new ArrayList<>();
+        assignmentList = new ArrayList<>();
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, assignmentTitles);
+        adapter = new SimpleAdapter(
+                this,
+                assignmentList,
+                R.layout.items_list, // Your custom layout
+                new String[]{"title"}, // The keys used in the HashMap
+                new int[]{R.id.tvFileName} // The TextView in lecture_list_item.xml
+        );
         listView.setAdapter(adapter);
 
         firestore = FirebaseFirestore.getInstance();
@@ -48,8 +53,8 @@ public class AssignmentsActivity extends AppCompatActivity {
         fetchAssignmentsFromFirestore();
 
         listView.setOnItemClickListener((adapterView, view, position, id) -> {
-            String url = assignmentUrls.get(position);
-            String title = assignmentTitles.get(position);
+            String url = assignmentList.get(position).get("linkOrFile");
+            String title = assignmentList.get(position).get("title");
             downloadFile(url, title);
         });
     }
@@ -57,22 +62,23 @@ public class AssignmentsActivity extends AppCompatActivity {
     private void fetchAssignmentsFromFirestore() {
         progressBar.setVisibility(View.VISIBLE);
 
-        // Order by timestamp in descending order
         firestore.collection("assignments")
                 .orderBy("timestamp", com.google.firebase.firestore.Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         if (task.getResult() != null && !task.getResult().isEmpty()) {
-                            assignmentTitles.clear(); // Clear existing list to avoid duplicates
-                            assignmentUrls.clear();
+                            assignmentList.clear(); // Clear existing list to avoid duplicates
 
                             for (DocumentSnapshot document : task.getResult().getDocuments()) {
                                 String title = document.getString("title");
                                 String linkOrFile = document.getString("linkOrFile");
 
-                                assignmentTitles.add(title);
-                                assignmentUrls.add(linkOrFile);
+                                // Add data to the list
+                                Map<String, String> dataMap = new HashMap<>();
+                                dataMap.put("title", title);
+                                dataMap.put("linkOrFile", linkOrFile);
+                                assignmentList.add(dataMap);
                             }
                             adapter.notifyDataSetChanged();
                             listView.setVisibility(View.VISIBLE);
@@ -85,7 +91,6 @@ public class AssignmentsActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                 });
     }
-
 
     private void downloadFile(String url, String fileName) {
         DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);

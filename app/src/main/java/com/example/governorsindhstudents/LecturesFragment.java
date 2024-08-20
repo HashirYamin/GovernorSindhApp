@@ -9,10 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,7 +38,6 @@ public class LecturesFragment extends Fragment {
     public LecturesFragment() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,9 +49,6 @@ public class LecturesFragment extends Fragment {
 
         fileNames = new ArrayList<>();
         fileUrls = new ArrayList<>();
-
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, fileNames);
-        listView.setAdapter(adapter);
 
         firestore = FirebaseFirestore.getInstance();
 
@@ -89,8 +85,7 @@ public class LecturesFragment extends Fragment {
                                 fileNames.add(fileName);
                                 fileUrls.add(fileUrl);
                             }
-                            adapter.notifyDataSetChanged();
-                            listView.setVisibility(View.VISIBLE);
+                            populateListView();
                         } else {
                             Toast.makeText(getContext(), "No files found.", Toast.LENGTH_SHORT).show();
                         }
@@ -99,6 +94,19 @@ public class LecturesFragment extends Fragment {
                     }
                     progressBar.setVisibility(View.GONE);
                 });
+    }
+
+    private void populateListView() {
+        listView.setAdapter(new ArrayAdapter<String>(requireContext(), R.layout.items_list, R.id.tvFileName, fileNames) {
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView tvFileName = view.findViewById(R.id.tvFileName);
+                tvFileName.setText(fileNames.get(position));
+                return view;
+            }
+        });
     }
 
     private void downloadFile(String url, String fileName) {

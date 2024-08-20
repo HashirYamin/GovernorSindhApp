@@ -1,5 +1,6 @@
 package com.example.governorsindhstudents;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -44,7 +46,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TextView notifyStudentsText, Name, RollNo;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private CardView notificationCardView, ContactUs ;
+    private CardView notificationCardView, ContactUs;
     private ActivityResultLauncher<Intent> updatesLauncher;
     private CardView academicsCardView, circularCardView, contactUsCardView;
     private CardView lastSelectedCardView = null;
@@ -62,7 +64,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Name = findViewById(R.id.name);
         RollNo = findViewById(R.id.roll_no);
         notificationCardView = findViewById(R.id.news_and_announcement);
-        notifyStudentsText=findViewById(R.id.notify_students_text);
+        notifyStudentsText = findViewById(R.id.notify_students_text);
         academicsCardView = findViewById(R.id.acedamics);
         circularCardView = findViewById(R.id.circular_cardview); // Example ID, replace with actual IDs
         contactUsCardView = findViewById(R.id.contact_us_cardview);
@@ -108,9 +110,26 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         bottomNavigationView.setBackground(null);
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            replaceFragment(getFragmentForMenuItem(item.getItemId()));
+            Fragment fragment = null;
+            boolean showProfileLayout = false;
+
+            if (item.getItemId() == R.id.profile) {
+                fragment = new ProfileFragment();
+                showProfileLayout = true;
+            } else {
+                fragment = getFragmentForMenuItem(item.getItemId());
+            }
+
+            if (fragment != null) {
+                manageFrameLayoutsVisibility(showProfileLayout);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(showProfileLayout ? R.id.profile_frame_layout : R.id.frame_layout, fragment)
+                        .commit();
+            }
+
             return true;
         });
+
         getUpdateCountFromDB();
 
         updatesLauncher = registerForActivityResult(
@@ -133,6 +152,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         });
 
     }
+
     private void onCardViewClicked(CardView selectedCardView) {
         if (currentlySelectedCardView != null) {
             currentlySelectedCardView.setSelected(false); // Remove effect from previous
@@ -154,9 +174,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (fragment != null) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.commitNow();
         }
     }
+
     private Fragment getFragmentFromCardView(int cardviewId) {
         if (cardviewId == R.id.acedamics) {
             return new HomeFragment();
@@ -164,7 +185,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             return new NewsFragment();
         } else if (cardviewId == R.id.contact_us_cardview) {
             return new ContactUsFragment();
-        }else {
+        } else {
             return null;
         }
     }
@@ -178,8 +199,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             return new HomeFragment();
         } else if (itemId == R.id.contact_us_cardview) {
             return new ContactUsFragment();
-        } else if (itemId == R.id.profile) {
-            return new ProfileFragment();
         } else if (itemId == R.id.circular_bottom) {
             return new NewsFragment();
         } else if (itemId == R.id.contacts) {
@@ -194,6 +213,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             return new LecturesFragment();
         } else if (itemId == R.id.links) {
             return new LinksFragment();
+        } else if (itemId == R.id.logout) {
+            showLogoutConfirmationDialog();
+            return null;
         } else {
             return null;
         }
@@ -202,11 +224,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Check if the profile fragment is currently shown
         startActivityById(item.getItemId());
+        Fragment profileFragment = fragmentManager.findFragmentById(R.id.profile_frame_layout);
+        if (profileFragment != null) {
+            fragmentManager.beginTransaction().remove(profileFragment).commitNow();
+            // Hide the profile frame layout
+            findViewById(R.id.profile_frame_layout).setVisibility(View.GONE);
+            findViewById(R.id.relative_profile_layout).setVisibility(View.GONE);
+            findViewById(R.id.frame_layout).setVisibility(View.VISIBLE);
+        }
+
+        // Replace the current fragment with the selected one from the navigation drawer
         replaceFragment(getFragmentForMenuItem(item.getItemId()));
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 
     private void retrieveStudentData() {
@@ -341,6 +375,37 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         updateNotificationUI(0);
                     }
                 });
+    }
+    private void manageFrameLayoutsVisibility(boolean showProfileLayout) {
+        findViewById(R.id.frame_layout).setVisibility(showProfileLayout ? View.GONE : View.VISIBLE);
+        findViewById(R.id.profile_frame_layout).setVisibility(showProfileLayout ? View.VISIBLE : View.GONE);
+        findViewById(R.id.relative_profile_layout).setVisibility(showProfileLayout ? View.VISIBLE : View.GONE);
+    }
+    private void showLogoutConfirmationDialog() {
+        // Create an AlertDialog.Builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+        builder.setTitle("Logout");
+        builder.setMessage("Are you sure you want to logout?");
+
+        // Set the positive button ("Yes")
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            // User clicked "Yes", so log them out
+            mAuth.signOut();
+            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
+
+        // Set the negative button ("No")
+        builder.setNegativeButton("No", (dialog, which) -> {
+            // User clicked "No", so dismiss the dialog
+            dialog.dismiss();
+        });
+
+        // Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }

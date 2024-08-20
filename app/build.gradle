@@ -1,6 +1,7 @@
+// In the App-level build.gradle
 plugins {
-    id 'com.google.gms.google-services'
-    alias(libs.plugins.android.application)
+    id 'com.android.application'
+    id 'com.google.gms.google-services'  // Apply the Google Services plugin
 }
 
 android {
@@ -28,13 +29,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildFeatures{
-        viewBinding true;
+    buildFeatures {
+        viewBinding true
     }
 }
 
 dependencies {
-
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth:23.0.0'
     implementation 'com.google.firebase:firebase-firestore:23.0.3'
+    implementation 'com.google.firebase:firebase-messaging:23.1.0'  // Use the latest version
     implementation 'com.airbnb.android:lottie:6.4.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'com.hbb20:ccp:2.5.0'
@@ -55,4 +56,3 @@ dependencies {
     //responsive size texts
     implementation 'com.intuit.ssp:ssp-android:1.1.1'
 }
-

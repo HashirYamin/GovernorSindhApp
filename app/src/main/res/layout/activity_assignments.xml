@@ -11,6 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/profile_bg"
+
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -32,7 +33,10 @@
         android:id="@+id/listView_assign"
         android:layout_width="match_parent"
         android:layout_below="@+id/assignment_cardview"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:divider="@android:color/transparent"
         android:layout_above="@id/progressBar_assign"
          />
 

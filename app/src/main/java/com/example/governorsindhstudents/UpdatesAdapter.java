@@ -24,10 +24,23 @@ public class UpdatesAdapter extends ArrayAdapter<UpdateItem> {
 
         TextView updateType = convertView.findViewById(R.id.updateType);
         TextView updateTimestamp = convertView.findViewById(R.id.updateTimestamp);
+        TextView newTextView = convertView.findViewById(R.id.new_text);
 
+        // Set the update type text
         updateType.setText(updateItem.getType());
+
+        // Set the timestamp text
         updateTimestamp.setText(updateItem.getTimestamp());
+
+        // If the update is new, display "New"
+        if (updateItem.isNew()) {
+            newTextView.setText("New");
+        } else {
+            newTextView.setText(""); // Clear the text if not new
+        }
 
         return convertView;
     }
+
+
 }

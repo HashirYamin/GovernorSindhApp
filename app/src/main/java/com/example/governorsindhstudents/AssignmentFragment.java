@@ -8,10 +8,9 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,15 +21,15 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AssignmentFragment extends Fragment {
 
     private ListView listView;
     private ProgressBar progressBar;
-    private ArrayAdapter<String> adapter;
-    private List<String> assignmentTitles;
-    private List<String> assignmentUrls;
+    private List<Map<String, String>> dataList;
     private FirebaseFirestore firestore;
 
     public AssignmentFragment() {
@@ -46,19 +45,15 @@ public class AssignmentFragment extends Fragment {
         listView = view.findViewById(R.id.listView_assign);
         progressBar = view.findViewById(R.id.progressBar_assign);
 
-        assignmentTitles = new ArrayList<>();
-        assignmentUrls = new ArrayList<>();
-
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, assignmentTitles);
-        listView.setAdapter(adapter);
+        dataList = new ArrayList<>();
 
         firestore = FirebaseFirestore.getInstance();
 
         fetchAssignmentsFromFirestore();
 
         listView.setOnItemClickListener((adapterView, view1, position, id) -> {
-            String url = assignmentUrls.get(position);
-            String title = assignmentTitles.get(position);
+            String url = dataList.get(position).get("linkOrFile");
+            String title = dataList.get(position).get("title");
             downloadFile(url, title);
         });
 
@@ -68,24 +63,35 @@ public class AssignmentFragment extends Fragment {
     private void fetchAssignmentsFromFirestore() {
         progressBar.setVisibility(View.VISIBLE);
 
-        // Order by timestamp in descending order
         firestore.collection("assignments")
                 .orderBy("timestamp", com.google.firebase.firestore.Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         if (task.getResult() != null && !task.getResult().isEmpty()) {
-                            assignmentTitles.clear(); // Clear existing list to avoid duplicates
-                            assignmentUrls.clear();
+                            dataList.clear(); // Clear existing list to avoid duplicates
 
                             for (DocumentSnapshot document : task.getResult().getDocuments()) {
                                 String title = document.getString("title");
                                 String linkOrFile = document.getString("linkOrFile");
 
-                                assignmentTitles.add(title);
-                                assignmentUrls.add(linkOrFile);
+                                // Prepare data for each assignment
+                                Map<String, String> dataMap = new HashMap<>();
+                                dataMap.put("assignmentName", title);  // Assign title to assignmentName
+                                dataMap.put("linkOrFile", linkOrFile); // Store the URL or file path
+                                dataList.add(dataMap);
                             }
-                            adapter.notifyDataSetChanged();
+
+                            // Bind data to the ListView using SimpleAdapter
+                            SimpleAdapter adapter = new SimpleAdapter(
+                                    getContext(),
+                                    dataList,
+                                    R.layout.items_list,  // Custom layout for list items
+                                    new String[]{"assignmentName"}, // Keys in dataMap
+                                    new int[]{R.id.tvFileName}  // TextView in items_list.xml
+                            );
+
+                            listView.setAdapter(adapter);
                             listView.setVisibility(View.VISIBLE);
                         } else {
                             Toast.makeText(getContext(), "No assignments found.", Toast.LENGTH_SHORT).show();

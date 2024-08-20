@@ -21,6 +21,8 @@
         android:layout_below="@+id/assignment_heading"
         android:layout_height="match_parent"
         android:layout_above="@id/progressBar_assign"
+        android:dividerHeight="@dimen/_10sdp"
+        android:divider="@android:color/transparent"
         />
 
 </RelativeLayout>

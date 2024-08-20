@@ -29,6 +29,7 @@
             android:layout_marginTop="@dimen/_9sdp"
             android:layout_below="@id/news_and_announcement" />
 
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -264,7 +265,29 @@
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relative_profile_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_marginTop="@dimen/_60sdp"
+
+        >
+        <FrameLayout
+            android:id="@+id/profile_frame_layout"
+            android:layout_width="match_parent"
+            android:visibility="invisible"
+            android:layout_height="@dimen/_500sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_40sdp"
+            android:background="@color/white"
+            android:layout_centerHorizontal="true"
+
+            />
+    </RelativeLayout>
+
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
@@ -278,3 +301,4 @@
             app:itemTextColor="@android:color/black"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
+
