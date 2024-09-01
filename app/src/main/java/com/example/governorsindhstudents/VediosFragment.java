@@ -50,7 +50,7 @@ public class VediosFragment extends Fragment {
         adapter = new SimpleAdapter(
                 getContext(),
                 videoList,
-                R.layout.items_list,
+                R.layout.index_liv,
                 new String[]{"description"},
                 new int[]{R.id.tvFileName}
         );

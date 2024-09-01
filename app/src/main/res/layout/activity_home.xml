@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@color/lavender"
+            android:background="@color/lightGreen"
             android:elevation="4dp"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -39,6 +39,7 @@
                 android:id="@+id/bottom_app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/Theme.BottomAppBar"
                 android:layout_gravity="bottom"
                 android:backgroundTint="@android:color/transparent"
                 app:fabCradleMargin="10dp"
@@ -55,53 +56,23 @@
             </com.google.android.material.bottomappbar.BottomAppBar>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
-        <View
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150sdp"
-            android:layout_below="@id/toolbar"
-            android:background="@drawable/profile_bg" />
+            android:layout_below="@+id/toolbar"
+            >
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/image_slider"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:iss_period="2500"
+                app:iss_auto_cycle="true"
+                app:iss_delay="1000"
+                app:iss_corner_radius="20"
+                />
 
-        <TextView
-            android:id="@+id/profile_text"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_80sdp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_58sdp"
-            android:background="@drawable/profile_bg2" />
+        </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_70sdp"
-            android:text="name"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_15ssp" />
-
-        <TextView
-            android:id="@+id/roll_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/_70sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:text="roll no"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_15ssp" />
-
-        <TextView
-            android:id="@+id/welcome_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/profile_text"
-            android:layout_centerHorizontal="true"
-            android:text="welcome To Governor IT App"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_15ssp" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/acedamics"
@@ -109,40 +80,44 @@
             android:layout_height="@dimen/_50sdp"
             android:clickable="true"
             android:foreground="@drawable/effect"
-            android:layout_below="@id/welcome_txt"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_195sdp"
             app:cardCornerRadius="@dimen/_10sdp">
 
             <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center"
-                android:src="@drawable/baseline_assignment_24" />
+                android:src="@drawable/book"
+
+                />
         </androidx.cardview.widget.CardView>
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/privacy_guidance"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_60sdp"
             android:layout_marginLeft="@dimen/_7sdp"
-            android:layout_marginTop="@dimen/_150sdp"
+            android:layout_marginTop="@dimen/_180sdp"
+            android:foreground="@drawable/effect"
             app:cardCornerRadius="@dimen/_10sdp">
+
 
             <ImageView
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_gravity="center"
-                android:src="@drawable/baseline_assignment_24" />
+                android:src="@drawable/guidance_policy_icon" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/circular_cardview"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_60sdp"
-            android:layout_marginLeft="@dimen/_58sdp"
+            android:layout_marginLeft="@dimen/_60sdp"
             android:foreground="@drawable/effect"
-            android:layout_marginTop="@dimen/_160sdp"
+            android:layout_marginTop="@dimen/_185sdp"
             android:clickable="true"
             app:cardCornerRadius="@dimen/_10sdp">
 
@@ -150,23 +125,25 @@
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_gravity="center"
-                android:src="@drawable/baseline_edit_note_24" />
+                android:src="@drawable/announcement_icon" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/events"
             android:clickable="true"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_60sdp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/_150sdp"
+            android:layout_marginTop="@dimen/_180sdp"
             android:layout_marginRight="@dimen/_7sdp"
+            android:foreground="@drawable/effect"
             app:cardCornerRadius="@dimen/_10sdp">
 
             <ImageView
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_gravity="center"
-                android:src="@drawable/baseline_assignment_24" />
+                android:src="@drawable/event_icon" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -176,8 +153,8 @@
             android:foreground="@drawable/effect"
             android:layout_height="@dimen/_60sdp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/_160sdp"
-            android:layout_marginRight="@dimen/_58sdp"
+            android:layout_marginTop="@dimen/_185sdp"
+            android:layout_marginRight="@dimen/_60sdp"
             app:cardCornerRadius="@dimen/_10sdp">
 
             <ImageView
@@ -193,7 +170,7 @@
             android:layout_height="@dimen/_50sdp"
             android:layout_below="@id/acedamics"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_7sdp"
             android:backgroundTint="@color/lightGreen2"
             app:cardCornerRadius="@dimen/_6sdp">
             <RelativeLayout
@@ -260,6 +237,8 @@
                     android:layout_marginLeft="@dimen/_52sdp"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:text="NO UPDATE AVAILABLE"
+                    android:fontFamily="sans-serif-medium"
+
                     android:textColor="@color/black"
                     android:textStyle="bold" />
             </RelativeLayout>

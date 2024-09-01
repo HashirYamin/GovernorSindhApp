@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
+//
 //    private void setupCardListeners() {
 //        lecturesCard.setOnClickListener(v -> {
 //            clearNotificationIcon("lectures");
@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
 //            startActivity(new Intent(getActivity(), VediosActivity.class));
 //        });
 //    }
-
+//
 //    private void clearNotificationIcon(String collectionName) {
 //        CardView cardView = getCardViewByName(collectionName);
 //        if (cardView == null) {

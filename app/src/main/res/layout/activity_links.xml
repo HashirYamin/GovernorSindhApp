@@ -2,12 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/links_cardview"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_150sdp"
+        app:cardUseCompatPadding="true"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -17,11 +18,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Links"
-                android:textSize="@dimen/_20ssp"
+                android:text="LINKS"
+                android:textSize="@dimen/_24ssp"
+                android:textStyle="bold"
                 android:textColor="@color/white"
                 android:layout_centerInParent="true"
-                />
+                android:shadowColor="@color/black"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
     <ListView
@@ -29,8 +34,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/links_cardview"
-        android:divider="@android:color/transparent"
         android:dividerHeight="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:divider="@android:color/transparent"
         />
 
     <ProgressBar

@@ -85,7 +85,7 @@ public class LinksFragment extends Fragment {
                             SimpleAdapter adapter = new SimpleAdapter(
                                     getContext(),
                                     dataList,
-                                    R.layout.items_list, // Custom layout for list items
+                                    R.layout.index_liv, // Custom layout for list items
                                     new String[]{"fileName"}, // Keys in dataMap
                                     new int[]{R.id.tvFileName} // TextView in items_list.xml
                             );

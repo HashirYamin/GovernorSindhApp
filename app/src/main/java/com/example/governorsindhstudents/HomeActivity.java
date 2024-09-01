@@ -3,6 +3,7 @@ package com.example.governorsindhstudents;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.Timestamp;
@@ -35,6 +45,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,13 +54,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
     private FragmentManager fragmentManager;
-    private TextView notifyStudentsText, Name, RollNo;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private CardView notificationCardView, ContactUs;
     private ActivityResultLauncher<Intent> updatesLauncher;
-    private CardView academicsCardView, circularCardView, contactUsCardView;
-    private CardView lastSelectedCardView = null;
+    private CardView academicsCardView, circularCardView, contactUsCardView, guidanceCardView, eventsCardview;
     private CardView currentlySelectedCardView;
 
 
@@ -58,17 +67,52 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_home);
+
         drawerLayout = findViewById(R.id.drawer_layout);
         bottomNavigationView = findViewById(R.id.bottomNavigation_view);
         toolbar = findViewById(R.id.toolbar);
-        Name = findViewById(R.id.name);
-        RollNo = findViewById(R.id.roll_no);
         notificationCardView = findViewById(R.id.news_and_announcement);
-        notifyStudentsText = findViewById(R.id.notify_students_text);
         academicsCardView = findViewById(R.id.acedamics);
         circularCardView = findViewById(R.id.circular_cardview); // Example ID, replace with actual IDs
         contactUsCardView = findViewById(R.id.contact_us_cardview);
+        guidanceCardView = findViewById(R.id.privacy_guidance);
+        eventsCardview = findViewById(R.id.events);
+        NavigationView navigationView = findViewById(R.id.nav_view);
 
+
+        ImageSlider imageSlider = findViewById(R.id.image_slider);
+        ArrayList<SlideModel> slideModels = new ArrayList<>();
+
+        slideModels.add(new SlideModel(R.drawable.govsindhimg5, ScaleTypes.FIT));
+//        slideModels.add(new SlideModel(R.drawable.govsindhimg, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.govsindhimg2, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.govsindhimg13, ScaleTypes.FIT));
+//        slideModels.add(new SlideModel(R.drawable.govsindhimg6, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.govsindhimg14, ScaleTypes.FIT));
+//        slideModels.add(new SlideModel(R.drawable.govsindhimg9, ScaleTypes.FIT));
+//        slideModels.add(new SlideModel(R.drawable.govsindhimg11, ScaleTypes.FIT));
+//        slideModels.add(new SlideModel(R.drawable.govsindhimg15, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.govsindhimg12, ScaleTypes.FIT));
+
+        imageSlider.setImageList(slideModels, ScaleTypes.FIT);
+        SharedPreferences sharedPreferences = getSharedPreferences("userDetails", MODE_PRIVATE);
+        String studentName = sharedPreferences.getString("studentName", "Name not found");
+        String email = sharedPreferences.getString("email", "Email not found");
+
+//        Intent intent = getIntent();
+//        String studentName = intent.getStringExtra("studentName");
+//        String email = intent.getStringExtra("email");
+
+        // Inflate the header layout and get the TextViews
+        View headerView = navigationView.getHeaderView(0);
+        TextView navHeaderName = headerView.findViewById(R.id.std_name);
+        TextView navHeaderEmail = headerView.findViewById(R.id.std_email);
+
+        // Set the name and email to the TextViews
+        navHeaderName.setText(studentName);
+        navHeaderEmail.setText(email);
         currentlySelectedCardView = academicsCardView;
         academicsCardView.setSelected(true);
 
@@ -84,6 +128,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             onCardViewClicked(contactUsCardView);
             replaceFragment(getFragmentFromCardView(R.id.contact_us_cardview));
         });
+        guidanceCardView.setOnClickListener(view -> {
+            onCardViewClicked(guidanceCardView);
+            replaceFragment(getFragmentFromCardView(R.id.privacy_guidance));
+        });
+        eventsCardview.setOnClickListener(view -> {
+            onCardViewClicked(eventsCardview);
+            replaceFragment(getFragmentFromCardView(R.id.events));
+        });
 
 
         listenForUpdates();
@@ -91,9 +143,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        retrieveStudentData();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         setSupportActionBar(toolbar);
@@ -147,11 +198,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         );
 
         notificationCardView.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, Updates.class);
-            updatesLauncher.launch(intent);
+            Intent intent2 = new Intent(HomeActivity.this, Updates.class);
+            updatesLauncher.launch(intent2);
         });
-
     }
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();  // This will handle the normal back button behavior.
+        }
+    }
+
 
     private void onCardViewClicked(CardView selectedCardView) {
         if (currentlySelectedCardView != null) {
@@ -185,6 +244,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             return new NewsFragment();
         } else if (cardviewId == R.id.contact_us_cardview) {
             return new ContactUsFragment();
+        } else if(cardviewId == R.id.privacy_guidance){
+            return  new GuidanceAndPolicy();
+        }else if (cardviewId == R.id.events){
+            return new EventsFragment();
         } else {
             return null;
         }
@@ -242,54 +305,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
-    private void retrieveStudentData() {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            String userId = currentUser.getUid();
-            DocumentReference documentReference = db.collection("students").document(userId);
-
-            // Load data from SharedPreferences first
-            SharedPreferences sharedPreferences = getSharedPreferences("StudentData", MODE_PRIVATE);
-            String savedName = sharedPreferences.getString("studentName", "");
-            String savedRollNo = sharedPreferences.getString("rollNo", "");
-
-            if (!savedName.isEmpty() && !savedRollNo.isEmpty()) {
-                Name.setText(savedName);
-                RollNo.setText(savedRollNo);
-            }
-
-            // Fetch data from Firestore
-            documentReference.get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    if (documentSnapshot.exists()) {
-                        String studentName = documentSnapshot.getString("studentName");
-                        String rollNo = documentSnapshot.getString("rollNo");
-
-                        Name.setText(studentName);
-                        RollNo.setText(rollNo);
-
-                        // Save the data to SharedPreferences
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("studentName", studentName);
-                        editor.putString("rollNo", rollNo);
-                        editor.apply();
-                    } else {
-                        Toast.makeText(HomeActivity.this, "No such document", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(HomeActivity.this, "Failed to fetch data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }).addOnFailureListener(e -> {
-                Toast.makeText(HomeActivity.this, "Failed to fetch data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            });
-        } else {
-            Toast.makeText(HomeActivity.this, "User not signed in", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
     private void updateNotificationUI(int updateCount) {
         TextView notificationTextView = findViewById(R.id.notify_students_text);
         CardView notificationCardView = findViewById(R.id.news_and_announcement);
@@ -307,6 +322,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             notificationCardView.findViewById(R.id.notify_circle_icon).setVisibility(View.INVISIBLE);
             // Hide notification icon
             notificationCardView.findViewById(R.id.notify_icon).setVisibility(View.GONE);
+
         }
     }
 
@@ -407,5 +423,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+//    private void signOut(){
+//        gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                finish();
+//                startActivity(new Intent(HomeActivity.this, MainActivity.class));
+//            }
+//        })
+//    }
 
 }

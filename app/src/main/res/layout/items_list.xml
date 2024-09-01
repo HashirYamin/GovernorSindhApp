@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:layout_width="@dimen/_275sdp"
-    android:layout_height="@dimen/_35sdp"
-    android:padding="10dp"
-    app:cardCornerRadius="@dimen/_5sdp"
-    app:cardElevation="@dimen/_2sdp"
-    android:backgroundTint="@color/lightGreen3"
-    app:cardMaxElevation="@dimen/_5sdp"
-    app:cardPreventCornerOverlap="true"
-    android:background="?attr/selectableItemBackground">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_12sdp"
+    android:elevation="@dimen/_4sdp"
+    android:backgroundTint="@color/white"
+    android:layout_marginHorizontal="@dimen/_10sdp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:padding="@dimen/_15sdp">
         <TextView
             android:id="@+id/tvFileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:layout_marginStart="@dimen/_22sdp"
-            android:layout_marginTop="@dimen/_8sdp"
             android:textSize="16sp"
             android:textStyle="bold"
-            />
-        <View
+            android:maxLines="1"
+            android:ellipsize="end"/>
+        <TextView
+            android:id="@+id/tvDescription"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_7sdp"
-
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvFileName"
+            android:textSize="@dimen/_14ssp"
             />
-    </LinearLayout>
+
+
+        <View
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/baseline_file_download_24"
+            />
+    </RelativeLayout>
+
 </androidx.cardview.widget.CardView>

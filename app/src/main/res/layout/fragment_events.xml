@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".EventsFragment">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_320sdp"
+        android:columnCount="2"
+        android:rowCount="2"
+
+        >
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_events_home"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_below="@id/acedamics"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:backgroundTint="@color/lightGreen2"
+            android:layout_marginRight="@dimen/_3sdp"
+            app:cardCornerRadius="@dimen/_6sdp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <View
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/views_bg"
+                    >
+                </View>
+                <View
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginLeft="@dimen/_8sdp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/baseline_event_24"
+
+                    >
+                </View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_55sdp"
+                    android:layout_centerVertical="true"
+                    android:text="Events"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/DarkGreen" />
+
+                <View
+                    android:layout_width="13dp"
+                    android:layout_height="7dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/_18sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:background="@drawable/baseline_circle_24"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+    </GridLayout>
+</RelativeLayout>

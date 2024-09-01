@@ -1,18 +1,32 @@
 {
   "project_info": {
     "project_number": "131757595464",
+    "firebase_url": "https://governorsindhapp-eb559-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "governorsindhapp-eb559",
     "storage_bucket": "governorsindhapp-eb559.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:131757595464:android:6fc28c123c63c48ae7f17d",
+        "mobilesdk_app_id": "1:131757595464:android:6208279b3823ac37e7f17d",
         "android_client_info": {
-          "package_name": "com.example.governorsindhstudents"
+          "package_name": "com.example.governorsindhfaculty"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "131757595464-v5893vdusf3gi9ggnko4bn8naii9chd1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.governorsindhfaculty",
+            "certificate_hash": "f2777aed6cc44298c13ffc8a4eabca614e52390a"
+          }
+        },
+        {
+          "client_id": "131757595464-7ik2kg5su7o3mcfp8t7dpuvetdno05a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD6FJvQ2RX3ld-OdtuThKdOlAUWcRsy53s"
@@ -20,7 +34,49 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "131757595464-7ik2kg5su7o3mcfp8t7dpuvetdno05a4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131757595464:android:6fc28c123c63c48ae7f17d",
+        "android_client_info": {
+          "package_name": "com.example.governorsindhstudents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "131757595464-bnrqu8v3e5be5bccu2undied243sea2p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.governorsindhstudents",
+            "certificate_hash": "f2777aed6cc44298c13ffc8a4eabca614e52390a"
+          }
+        },
+        {
+          "client_id": "131757595464-7ik2kg5su7o3mcfp8t7dpuvetdno05a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6FJvQ2RX3ld-OdtuThKdOlAUWcRsy53s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "131757595464-7ik2kg5su7o3mcfp8t7dpuvetdno05a4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

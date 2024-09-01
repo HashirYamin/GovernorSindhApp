@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.GovernorSindhStudents" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.GovernorSindhStudents" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your light theme here. -->
 <!--        primary brand color-->
         <item name="colorPrimaryDark">@color/lightGreen</item>

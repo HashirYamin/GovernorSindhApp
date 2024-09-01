@@ -51,6 +51,9 @@ dependencies {
     implementation 'com.airbnb.android:lottie:6.4.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'com.hbb20:ccp:2.5.0'
+    implementation 'com.google.android.gms:play-services-auth:20.6.0'
+
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
     //responsive size UI
     implementation 'com.intuit.sdp:sdp-android:1.1.1'
     //responsive size texts

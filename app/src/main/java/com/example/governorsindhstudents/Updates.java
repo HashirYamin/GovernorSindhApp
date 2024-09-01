@@ -2,10 +2,13 @@ package com.example.governorsindhstudents;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +33,7 @@ public class Updates extends AppCompatActivity {
     private UpdatesAdapter updatesAdapter;
     private List<UpdateItem> updatesList = new ArrayList<>();
     private Button deleteBtn;
+    private ProgressBar progressBar;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -37,14 +41,19 @@ public class Updates extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_updates);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_updates);
+        pre
+
         updatesListView = findViewById(R.id.updatesListView);
         updatesAdapter = new UpdatesAdapter(this, updatesList);
         updatesListView.setAdapter(updatesAdapter);
         deleteBtn = findViewById(R.id.deleteAllButton);
+        progressBar = findViewById(R.id.progress_bar_updates);
 
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-
+        progressBar.setVisibility(View.VISIBLE);
         loadUpdates();
 
         deleteBtn.setOnClickListener(v -> {
@@ -63,6 +72,7 @@ public class Updates extends AppCompatActivity {
 
         updatesRef.orderBy("timestamp", Query.Direction.DESCENDING).get()
                 .addOnCompleteListener(task -> {
+                    progressBar.setVisibility(ProgressBar.GONE);
                     if (task.isSuccessful()) {
                         // Use Pakistan Standard Time (Asia/Karachi) for formatting
                         DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm a");

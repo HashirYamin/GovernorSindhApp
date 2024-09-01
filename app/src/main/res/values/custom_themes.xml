@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme specifically for BottomAppBar -->
+    <style name="Theme.BottomAppBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize BottomAppBar specific styles here -->
+        <item name="colorPrimary">@color/lightGreen</item>
+        <item name="backgroundTint">@color/white</item>
+        <!-- Add other custom styles as needed -->
+    </style>
+
+
+</resources>

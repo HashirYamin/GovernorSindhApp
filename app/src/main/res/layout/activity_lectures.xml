@@ -20,19 +20,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LECTURES"
-                android:textSize="@dimen/_20ssp"
+                android:text="Lectures"
+                android:textSize="@dimen/_24ssp"
+                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true"
+                android:shadowColor="@color/black"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
     <ListView
         android:id="@+id/lectures_list"
-        android:dividerHeight="10dp"
         android:layout_below="@+id/lec_cardview"
         android:layout_width="match_parent"
         android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/_10sdp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_10sdp"/>
 </RelativeLayout>

@@ -97,7 +97,7 @@ public class LecturesFragment extends Fragment {
     }
 
     private void populateListView() {
-        listView.setAdapter(new ArrayAdapter<String>(requireContext(), R.layout.items_list, R.id.tvFileName, fileNames) {
+        listView.setAdapter(new ArrayAdapter<String>(requireContext(), R.layout.lectures_index, R.id.tvFileName, fileNames) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

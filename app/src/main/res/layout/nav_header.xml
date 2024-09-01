@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="176dp"
-    android:gravity="bottom"
-    android:padding="16dp"
-    android:background="@drawable/headerbkg"
+    android:layout_height="@dimen/_170sdp"
+    android:background="@drawable/navbg"
+    android:paddingStart="@dimen/_14sdp"
+    android:paddingTop="@dimen/_40sdp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/aklogo"/>
+        android:id="@+id/logo"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:src="@drawable/governorlogo"/>
 
     <TextView
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Android Knowledge"
+        android:text="Governor Sindh It Student"
         android:textColor="@color/white"
+        android:layout_below="@+id/logo"
         android:textStyle="bold"/>
 
     <TextView
+        android:id="@+id/std_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="contact@androidknowledge.com"
+        android:text=""
         android:textColor="@color/white"
-        android:textSize="14sp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_below="@+id/text"
+        android:textSize="14sp"/>
+    <TextView
+        android:id="@+id/std_email"
+        android:layout_below="@+id/std_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="14sp"/>
 
-</LinearLayout>
+</RelativeLayout>

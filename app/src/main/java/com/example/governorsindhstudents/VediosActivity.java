@@ -1,6 +1,7 @@
 package com.example.governorsindhstudents;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,9 @@ public class VediosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_vedios);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_vedios);
 
         listView = findViewById(R.id.listView_videos);
@@ -75,7 +79,7 @@ public class VediosActivity extends AppCompatActivity {
                             SimpleAdapter adapter = new SimpleAdapter(
                                     VediosActivity.this,
                                     dataList,
-                                    R.layout.items_list,  // Custom layout for list items
+                                    R.layout.index_liv,  // Custom layout for list items
                                     new String[]{"fileName"}, // Keys in dataMap
                                     new int[]{R.id.tvFileName}  // TextView in items_list.xml
                             );

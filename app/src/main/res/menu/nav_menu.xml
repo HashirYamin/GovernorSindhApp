@@ -63,10 +63,18 @@
                     android:id="@+id/contacts"
                     android:title="Contacts"
                     android:icon="@drawable/baseline_contact_page_24"/>
+
+            </group>
+        </menu>
+    </item>
+    <item android:title="Settings">
+        <menu>
+            <group>
                 <item
                     android:id="@+id/logout"
                     android:title="Log Out"
                     android:icon="@drawable/logout"/>
+
             </group>
         </menu>
     </item>

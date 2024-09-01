@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="12dp"
+    android:background="@color/lightGreen">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/events_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_160sdp"
+        android:layout_marginBottom="12dp"
+        app:cardUseCompatPadding="true"
+        android:backgroundTint="@color/lightGreen"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/profile_bg"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Events"
+                android:textSize="@dimen/_24ssp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                android:shadowColor="@color/black"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_events"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:indeterminateTint="@color/DarkGreen" />
+
+    <ListView
+        android:id="@+id/listView_events"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/events_cardview"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/_12sdp"
+        android:paddingTop="8dp"
+        android:backgroundTint="@color/lightGreen"
+        android:paddingBottom="8dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:background="@color/white"/>
+</RelativeLayout>

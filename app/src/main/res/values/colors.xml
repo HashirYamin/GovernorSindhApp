@@ -13,8 +13,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="lavender">#8692f7</color>
-    <color name="lightGreen">#2F7D27</color>
+    <color name="lightGreen">#35822D</color>
     <color name="lightGreen2">#A6FFBC</color>
     <color name="lightGreen3">#BAFFCB</color>
     <color name="DarkGreen">#075B23</color>
+    <color name="google_red">#DB4437</color>
+    <color name="google_yellow">#F4B400</color>
+    <color name="google_green">#0F9D58</color>
+    <color name="google_blue">#4285F4</color>
+
 </resources>

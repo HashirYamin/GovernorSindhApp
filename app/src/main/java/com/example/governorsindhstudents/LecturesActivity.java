@@ -2,6 +2,7 @@ package com.example.governorsindhstudents;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -33,6 +34,8 @@ public class LecturesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lectures);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_lectures);
 
         listView = findViewById(R.id.lectures_list);
@@ -79,7 +82,7 @@ public class LecturesActivity extends AppCompatActivity {
                             SimpleAdapter adapter = new SimpleAdapter(
                                     LecturesActivity.this,
                                     dataList,
-                                    R.layout.items_list, // Custom layout for list items
+                                    R.layout.lectures_index, // Custom layout for list items
                                     new String[]{"fileName"}, // Keys in dataMap
                                     new int[]{R.id.tvFileName} // TextView in lecture_list_item.xml
                             );

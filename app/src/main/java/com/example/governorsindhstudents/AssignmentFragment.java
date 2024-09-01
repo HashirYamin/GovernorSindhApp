@@ -73,11 +73,13 @@ public class AssignmentFragment extends Fragment {
 
                             for (DocumentSnapshot document : task.getResult().getDocuments()) {
                                 String title = document.getString("title");
+                                String description = document.getString("description");
                                 String linkOrFile = document.getString("linkOrFile");
 
                                 // Prepare data for each assignment
                                 Map<String, String> dataMap = new HashMap<>();
-                                dataMap.put("assignmentName", title);  // Assign title to assignmentName
+                                dataMap.put("title", title);  // Assign title to assignmentName
+                                dataMap.put("description", description);
                                 dataMap.put("linkOrFile", linkOrFile); // Store the URL or file path
                                 dataList.add(dataMap);
                             }
@@ -87,8 +89,8 @@ public class AssignmentFragment extends Fragment {
                                     getContext(),
                                     dataList,
                                     R.layout.items_list,  // Custom layout for list items
-                                    new String[]{"assignmentName"}, // Keys in dataMap
-                                    new int[]{R.id.tvFileName}  // TextView in items_list.xml
+                                    new String[]{"title","description"}, // Keys in dataMap
+                                    new int[]{R.id.tvFileName,R.id.tvDescription}  // TextView in items_list.xml
                             );
 
                             listView.setAdapter(adapter);

@@ -2,6 +2,7 @@ package com.example.governorsindhstudents;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.governorsindhstudents.R;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -34,6 +36,9 @@ public class AssignmentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignments);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_assignments);
+
         listView = findViewById(R.id.listView_assign);
         progressBar = findViewById(R.id.progressBar_assign);
 
@@ -43,8 +48,8 @@ public class AssignmentsActivity extends AppCompatActivity {
                 this,
                 assignmentList,
                 R.layout.items_list, // Your custom layout
-                new String[]{"title"}, // The keys used in the HashMap
-                new int[]{R.id.tvFileName} // The TextView in lecture_list_item.xml
+                new String[]{"title", "description"}, // The keys used in the HashMap
+                new int[]{R.id.tvFileName, R.id.tvDescription} // The TextViews in items_list.xml
         );
         listView.setAdapter(adapter);
 
@@ -72,11 +77,13 @@ public class AssignmentsActivity extends AppCompatActivity {
 
                             for (DocumentSnapshot document : task.getResult().getDocuments()) {
                                 String title = document.getString("title");
+                                String description = document.getString("description");
                                 String linkOrFile = document.getString("linkOrFile");
 
                                 // Add data to the list
                                 Map<String, String> dataMap = new HashMap<>();
                                 dataMap.put("title", title);
+                                dataMap.put("description", description); // Include description
                                 dataMap.put("linkOrFile", linkOrFile);
                                 assignmentList.add(dataMap);
                             }

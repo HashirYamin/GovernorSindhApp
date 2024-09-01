@@ -27,8 +27,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GovernorSindhStudents"
         tools:targetApi="31">
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <!-- Activities -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".EventsActivity"
+            android:exported="false" /> <!-- Activities -->
         <activity
             android:name=".NewsActivity"
             android:exported="false" />
@@ -47,14 +57,14 @@
         <activity
             android:name=".Updates"
             android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".PhoneNumberVerification"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".OtpVerification"-->
+<!--            android:exported="false" />-->
         <activity
-            android:name=".PhoneNumberVerification"
-            android:exported="false" />
-        <activity
-            android:name=".OtpVerification"
-            android:exported="false" />
-        <activity
-            android:name=".ChangePassword"
+            android:name=".ForgotPassword"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
@@ -67,13 +77,10 @@
             android:exported="true"> <!-- Set exported to true -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Firebase Messaging Service -->
-
-
     </application>
 
 </manifest>

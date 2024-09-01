@@ -13,16 +13,27 @@
         android:id="@+id/Lectures_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_20sdp"
+        android:text="Lectures :"
+        android:textSize="@dimen/_19ssp"
+        android:textStyle="bold"
         android:textColor="@color/black"
-        android:text="Lectures:"/>
+        android:padding="8dp"
+        android:fontFamily="@font/robotoslab"
+        android:shadowColor="@color/black"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="0.5"
+        android:letterSpacing="0.03"
+        android:layout_gravity="center" />
 
     <ListView
         android:layout_below="@+id/Lectures_heading"
         android:id="@+id/listView"
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:dividerHeight="@dimen/_10sdp"
+        android:dividerHeight="@dimen/_3sdp"
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"
         />

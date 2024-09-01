@@ -1,5 +1,6 @@
 package com.example.governorsindhstudents;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -25,14 +26,19 @@ public class NewsActivity extends AppCompatActivity {
     private SimpleAdapter adapter;
     private List<Map<String, String>> newsList;
     private FirebaseFirestore firestore;
+    private String title, content, day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_news);
+
         listView = findViewById(R.id.listView_news);
         progressBar = findViewById(R.id.progress_bar_news);
+
 
         newsList = new ArrayList<>();
 
@@ -62,9 +68,9 @@ public class NewsActivity extends AppCompatActivity {
                             newsList.clear();
 
                             for (DocumentSnapshot document : task.getResult().getDocuments()) {
-                                String title = document.getString("title");
-                                String content = document.getString("content");
-                                String day = document.getString("day");
+                               title = document.getString("title");
+                               content = document.getString("content");
+                               day = document.getString("day");
 
                                 // Check if any field is null
                                 if (title == null) title = "No Title";
