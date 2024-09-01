@@ -43,7 +43,7 @@ public class Updates extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_updates);
-        pre
+
 
         updatesListView = findViewById(R.id.updatesListView);
         updatesAdapter = new UpdatesAdapter(this, updatesList);
